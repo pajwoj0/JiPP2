@@ -1,6 +1,7 @@
 #ifndef CALC_CPP_CALC_H
 #define CALC_CPP_CALC_H
 
+void blad();
 void zakonczProgram();
 int add(int a, int b);
 int subtract(int a, int b);

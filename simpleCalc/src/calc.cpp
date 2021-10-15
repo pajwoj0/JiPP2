@@ -6,6 +6,11 @@
 
 using namespace std;
 
+void blad() {
+    cout<<"Blad! Sprawdz skladnie. Nacisnij dowolny przycisk, aby pokazac pomoc..."<<endl;
+    getchar();
+}
+
 void zakonczProgram() {
     cout<<endl<<"Nacisnij dowolny przycisk, aby zakonczyc dzialanie programu...";
     getchar();
