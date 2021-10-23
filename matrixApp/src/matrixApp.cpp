@@ -61,5 +61,9 @@ int main(int argc, char **argv) {
         exit();
     }
 
+    if(experimental::string_view(argv[1]) == "help") {
+        help();
+    }
+
     return 0;
 }

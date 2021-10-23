@@ -1,5 +1,11 @@
 #ifndef MAIN_CPP_MATRIXAPP_H
 #define MAIN_CPP_MATRIXAPP_H
+/**
+ * matrixApp - kalkulator macierzy, projekt na JiPP
+ * @file matrixApp.h
+ * @author Wojciech Pajtel
+ * @version 0.1 22.10.2021
+ */
 
 /**
  * Funkcja wywolujaca blad.
