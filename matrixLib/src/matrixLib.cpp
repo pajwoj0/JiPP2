@@ -8,7 +8,6 @@ void error() {
     cout<<"Blad! Sprawdz skladnie. Nacisnij dowolny przycisk, aby pokazac pomoc..."<<endl;
     getchar();
     help();
-    exit();
 }
 
 void exit() {
@@ -64,6 +63,7 @@ void help() {
         case 3:
             cout<<endl;
             cout<<"Mnozy dwie macierze, zwraca wynik.\n";
+            cout<<"UWAGA! Jezeli aRows nie jest rowne bCols, funkcja nie bedzie dzialac!\n";
             cout<<"multiplyMatrix [matrixA] [matrixB] [aRows] [aCols] [bCols]\n";
             cout<<"matrixA - Pierwsza macierz.\n";
             cout<<"matrixB - Druga macierz.\n";
@@ -97,6 +97,7 @@ void help() {
         case 6:
             cout<<endl;
             cout<<"Podnosi macierz do potegi.\n";
+            cout<<"UWAGA! Ilosc wierszy musi byc rowna ilosci kolumn.\n";
             cout<<"powerMatrix [matrixA] [rows] [cols] [power]\n";
             cout<<"matrixA - Macierz.\n";
             cout<<"rows - Ilosc wierszy w macierzy.\n";
@@ -208,70 +209,96 @@ int** subtractMatrix(int **matrixA, int **matrixB, int rows, int cols) {
     return result;
 }
 
+int** multiplyMatrix(int **matrixA, int **matrixB, int aRows, int aCols, int bCols) {
+    int** result = new int*[aRows];
+    for(int i=0; i<aRows; i++) result[i] = new int[bCols];
+
+    for(int i=0; i<aRows; i++)
+        for(int j=0; j<bCols; j++)
+            for(int k=0; k<aCols; k++) result[i][j] += matrixA[i][k] * matrixB[k][j];
+
+    return result;
+}
+
+int** multiplyByScalar(int **matrixA, int rows, int cols, int scalar) {
+    int** result = new int*[rows];
+    for(int i=0; i<rows; i++) result[i] = new int[cols];
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            result[i][j]=matrixA[i][j]*scalar;
+
+    return result;
+}
+
+int** transpozeMatrix(int **matrixA, int rows, int cols) {
+    int** result = new int*[cols];
+    for(int i=0; i<cols; i++) result[i] = new int[rows];
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            result[j][i]=matrixA[i][j];
+
+    return result;
+}
+
+int** powerMatrix(int **matrixA, int rows, int cols, int power) {
+    int** result = new int*[cols];
+    for(int i=0; i<cols; i++) result[i] = new int[rows];
+
+    if(power==0) {
+        for(int i=0; i<rows; i++)
+            for(int j=0; j<cols; j++) {
+                if(i==j) result[i][j]=1;
+                else result[i][j]=0;
+            }
+    }
+
+    else {
+        for(int i=1; i<=power; i++) {
+            if(i==1) {
+                for(int i=0; i<rows; i++)
+                    for(int j=0; j<cols; j++)
+                        result[i][j]=matrixA[i][j];
+            }
+
+            else result=multiplyMatrix(result, matrixA, rows, cols, cols);
+        }
+    }
+
+    return result;
+}
+
+bool matrixIsDiagonal(int **matrixA, int rows, int cols) {
+    if(rows!=cols) return false;
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            if(i!=j && matrixA[i][j]!=0) return false;
+    return true;
+}
+
+void sortRow(int *array, int cols) {
+    for(int i=0; i<cols-1; i++)
+        for(int j=0; j<cols-i-1; j++)
+            if(array[j] > array[j+1]) swap(array[j], array[j+1]);
+}
+
+int** sortRowsInMatrix(int **matrixA, int rows, int cols) {
+    int** result = new int*[cols];
+    for(int i=0; i<cols; i++) result[i] = new int[rows];
+
+    for(int i=0; i<rows; i++) sortRow(matrixA[i], cols);
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            result[i][j]=matrixA[i][j];
+
+    return result;
+}
+
 void swap(int &a, int &b) {
     int temp=a;
     a=b;
     b=temp;
 }
-
-//DOUBLE
-/*
-
-void cinNewDouble(double &value) {
-    cin>>value;
-
-    while(!cin.good()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
-        cin>>value;
-    }
-}
-
-void printMatrix(double **matrix, int rows, int cols) {
-    for(int i=0; i<rows; i++) {
-        for(int j=0; j<cols; j++) {
-            cout<<matrix[i][j]<<"\t";
-        }
-        cout<<endl;
-    }
-    cout<<endl;
-}
-
-void fillMatrix(double **matrix, int rows, int cols) {
-    for(int i=0; i<rows; i++) {
-        for(int j=0; j<cols; j++) {
-            cout<<"Aktualnie wprowadzana wartosc: kolumna "<<j+1<<", wiersz "<<i+1<<": ";
-            cin>>matrix[i][j];
-        }
-    }
-}
-
-double** addMatrix (double **matrixA, double **matrixB, int rows, int cols) {
-    double** result = new double*[rows];
-    for(int i=0; i<rows; i++) result[i] = new double[cols];
-
-    for(int i=0; i<rows; i++)
-        for(int j=0; j<cols; j++)
-            result[i][j]=matrixA[i][j]+matrixB[i][j];
-
-    return result;
-}
-
-int** subtractMatrix(int **matrixA, int **matrixB, int rows, int cols) {
-    double** result = new double*[rows];
-    for(int i=0; i<rows; i++) result[i] = new double[cols];
-
-    for(int i=0; i<rows; i++)
-        for(int j=0; j<cols; j++)
-            result[i][j]=matrixA[i][j]-matrixB[i][j];
-
-    return result;
-}
-
-void swap(double &a, double &b) {
-    double temp=a;
-    a=b;
-    b=temp;
-}
-*/

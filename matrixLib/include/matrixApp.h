@@ -4,7 +4,7 @@
  * matrixApp - kalkulator macierzy, projekt na JiPP
  * @file matrixApp.h
  * @author Wojciech Pajtel
- * @version 0.11 23.10.2021
+ * @version 0.2 23.10.2021
  */
 
 /**
@@ -66,6 +66,7 @@ int** subtractMatrix(int **matrixA, int **matrixB, int rows, int cols);
 
 /**
  * Mnozy dwie macierze, zwraca wynik.
+ * UWAGA! Jezeli aRows nie jest rowne bCols, funkcja nie bedzie dzialac!
  * @param matrixA Pierwsza macierz.
  * @param matrixB Druga macierz.
  * @param aRows Ilosc wierszy w pierwszej macierzy.
@@ -83,7 +84,7 @@ int** multiplyMatrix(int **matrixA, int **matrixB, int aRows, int aCols, int bCo
  * @param scalar Skalar.
  * @return Wynik mnozenia macierzy oraz skalara.
  */
-int** multiplyByScalar(int **matrixA, int rows, int cols, int **scalar);
+int** multiplyByScalar(int **matrixA, int rows, int cols, int scalar);
 
 /**
  * Transponuje macierz (zamienia wiersze z kolumnami).
@@ -96,13 +97,14 @@ int** transpozeMatrix(int **matrixA, int rows, int cols);
 
 /**
  * Podnosi macierz do potegi.
+ * UWAGA! Ilosc wierszy musi byc rowna ilosci kolumn.
  * @param matrixA Macierz.
  * @param rows Ilosc wierszy w macierzy.
  * @param cols Ilosc kolumn w macierzy.
  * @param power Potega do ktorej podnosimy macierz, liczba >=0.
  * @return Wynik podniesienia macierzy do potegi.
  */
-int** powerMatrix(int **matrixA, int rows, int cols, unsigned int power);
+int** powerMatrix(int **matrixA, int rows, int cols, int power);
 
 /**
  * Znajduje wyznacznik macierzy.
@@ -129,8 +131,20 @@ bool matrixIsDiagonal(int **matrixA, int rows, int cols);
  */
 void swap(int &a, int &b);
 
+/**
+ * Sortuje rosnaco tablice, uzywa sortowania babelkowego.
+ * @param array Tablica do posortowania.
+ * @param cols Ilosc wartosci w tablicy.
+ */
 void sortRow(int *array, int cols);
-void sortRowsInMatrix(int **matrixA, int rows, int cols);
+
+/**
+ * Sortuje rosnaco wszystkie wiersze w macierzy, uzywa sortRow.
+ * @param matrixA Macierz do posortowania.
+ * @param rows Ilosc wierszy w macierzy.
+ * @param cols Ilosc kolumn w macierzy.
+ */
+int** sortRowsInMatrix(int **matrixA, int rows, int cols);
 
 /**
  * Funkcja odpowiadajaca za wprowadzenie wartosci zmiennoprzecinkowej z klawiatury, uzytkownik wpisuje wartosc dopoki nie jest ona wartoscia zmiennoprzecinkowa (double).
@@ -162,7 +176,7 @@ void fillMatrix(double **matrix, int rows, int cols);
  * @param cols Ilosc kolumn w macierzach.
  * @return Wynik dodania macierzy matrixA oraz macierzy matrixB.
  */
-int** addMatrix(double **matrixA, double **matrixB, int rows, int cols);
+double** addMatrix(double **matrixA, double **matrixB, int rows, int cols);
 
 /**
  * Odejmuje druga macierz od pierwszej, zwraca wynik.
@@ -172,7 +186,7 @@ int** addMatrix(double **matrixA, double **matrixB, int rows, int cols);
  * @param cols Ilosc kolumn w macierzach.
  * @return Wynik odjecia macierzy matrixB od macierzy matrixA.
  */
-int** subtractMatrix(double **matrixA, double **matrixB, int rows, int cols);
+double** subtractMatrix(double **matrixA, double **matrixB, int rows, int cols);
 
 /**
  * Mnozy dwie macierze, zwraca wynik.
@@ -183,7 +197,7 @@ int** subtractMatrix(double **matrixA, double **matrixB, int rows, int cols);
  * @param bCols Ilosc kolumn w drugiej macierzy.
  * @return Wynik mnozenia macierzy matrixA oraz macierzy matrixB.
  */
-int** multiplyMatrix(double **matrixA, double **matrixB, int aRows, int aCols, int bCols);
+double** multiplyMatrix(double **matrixA, double **matrixB, int aRows, int aCols, int bCols);
 
 /**
  * Mnozy macierz przez skalar, zwraca wynik.
@@ -193,7 +207,7 @@ int** multiplyMatrix(double **matrixA, double **matrixB, int aRows, int aCols, i
  * @param scalar Skalar.
  * @return Wynik mnozenia macierzy oraz skalara.
  */
-int** multiplyByScalar(double **matrixA, int rows, int cols, double **scalar);
+double** multiplyByScalar(double **matrixA, int rows, int cols, double scalar);
 
 /**
  * Transponuje macierz (zamienia wiersze z kolumnami).
@@ -202,7 +216,7 @@ int** multiplyByScalar(double **matrixA, int rows, int cols, double **scalar);
  * @param cols Ilosc kolumn w macierzy.
  * @return Transponowana macierz.
  */
-int** transpozeMatrix(double **matrixA, int rows, int cols);
+double** transpozeMatrix(double **matrixA, int rows, int cols);
 
 /**
  * Podnosi macierz do potegi.
@@ -212,7 +226,7 @@ int** transpozeMatrix(double **matrixA, int rows, int cols);
  * @param power Potega do ktorej podnosimy macierz, liczba >=0.
  * @return Wynik podniesienia macierzy do potegi.
  */
-int** powerMatrix(double **matrixA, int rows, int cols, unsigned int power);
+double** powerMatrix(double **matrixA, int rows, int cols, unsigned int power);
 
 /**
  * Znajduje wyznacznik macierzy.
@@ -221,7 +235,7 @@ int** powerMatrix(double **matrixA, int rows, int cols, unsigned int power);
  * @param cols Ilosc kolumn w macierzy.
  * @return Wyznacznik macierzy.
  */
-int determinantMatrix(double **matrixA, int rows, int cols);
+double determinantMatrix(double **matrixA, int rows, int cols);
 
 /**
  * Sprawdza diagonalnosc macierzy.
