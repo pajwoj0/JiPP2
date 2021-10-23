@@ -4,7 +4,7 @@
  * matrixApp - kalkulator macierzy, projekt na JiPP
  * @file matrixApp.h
  * @author Wojciech Pajtel
- * @version 0.1 22.10.2021
+ * @version 0.11 23.10.2021
  */
 
 /**
