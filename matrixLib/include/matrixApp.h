@@ -23,6 +23,12 @@ void exit();
 void help();
 
 /**
+ * Funkcja odpowiadajaca za wprowadzenie wartosci calkowitej z klawiatury, uzytkownik wpisuje wartosc dopoki nie jest ona wartoscia calkowita (int).
+ * @param value Wartosc wpisywana przez uzytkownika.
+ */
+void cinNewInt(int &value);
+
+/**
  * Wyswietla macierz w konsoli.
  * @param matrix Macierz do wyswietlenia.
  * @param rows Ilosc wierszy w macierzy do wyswietlenia.
@@ -86,7 +92,7 @@ int** multiplyByScalar(int **matrixA, int rows, int cols, int **scalar);
  * @param cols Ilosc kolumn w macierzy.
  * @return Transponowana macierz.
  */
-int** transposeMatrix(int **matrixA, int rows, int cols);
+int** transpozeMatrix(int **matrixA, int rows, int cols);
 
 /**
  * Podnosi macierz do potegi.
@@ -125,6 +131,12 @@ void swap(int &a, int &b);
 
 void sortRow(int *array, int cols);
 void sortRowsInMatrix(int **matrixA, int rows, int cols);
+
+/**
+ * Funkcja odpowiadajaca za wprowadzenie wartosci zmiennoprzecinkowej z klawiatury, uzytkownik wpisuje wartosc dopoki nie jest ona wartoscia zmiennoprzecinkowa (double).
+ * @param value Wartosc wpisywana przez uzytkownika.
+ */
+void cinNewDouble(double &value);
 
 /**
  * Wyswietla macierz w konsoli.
@@ -190,7 +202,7 @@ int** multiplyByScalar(double **matrixA, int rows, int cols, double **scalar);
  * @param cols Ilosc kolumn w macierzy.
  * @return Transponowana macierz.
  */
-int** transposeMatrix(double **matrixA, int rows, int cols);
+int** transpozeMatrix(double **matrixA, int rows, int cols);
 
 /**
  * Podnosi macierz do potegi.

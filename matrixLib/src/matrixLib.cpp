@@ -1,5 +1,7 @@
 #include <iostream>
 #include "matrixApp.h"
+#include <string>
+#include <experimental/string_view>
 using namespace std;
 
 void error() {
@@ -26,7 +28,7 @@ void help() {
     cout<<"2 - subtractMatrix - odejmowanie macierzy\n";
     cout<<"3 - multiplyMatrix - mnozenie macierzy\n";
     cout<<"4 - multiplyByScalar - mnozenie macierzy przez skalar\n";
-    cout<<"5 - transposeMatrix - transpozycja macierzy\n";
+    cout<<"5 - transpozeMatrix - transpozycja macierzy\n";
     cout<<"6 - powerMatrix - potegowanie macierzy\n";
     cout<<"7 - determinantMatrix - szukanie wyznacznika macierzy\n";
     cout<<"8 - matrixIsDiagonal - sprawdzanie, czy macierz jest diagonalna\n";
@@ -85,10 +87,10 @@ void help() {
         case 5:
             cout<<endl;
             cout<<"Transponuje macierz (zamienia wiersze z kolumnami).\n";
-            cout<<"transposeMatrix [matrixA] [rows] [cols]\n";
+            cout<<"transpozeMatrix [matrixA] [rows] [cols]\n";
             cout<<"matrixA - Nacierz.\n";
-            cout<<"rows - Ilosc wierszy w macierzach.\n";
-            cout<<"cols - Ilosc kolumn w macierzach.\n";
+            cout<<"rows - Ilosc wierszy w macierzy.\n";
+            cout<<"cols - Ilosc kolumn w macierzy.\n";
             cout<<"Zwraca transponowana macierz.\n";
             break;
 
@@ -97,8 +99,8 @@ void help() {
             cout<<"Podnosi macierz do potegi.\n";
             cout<<"powerMatrix [matrixA] [rows] [cols] [power]\n";
             cout<<"matrixA - Macierz.\n";
-            cout<<"rows - Ilosc wierszy w macierzach.\n";
-            cout<<"cols - Ilosc kolumn w macierzach.\n";
+            cout<<"rows - Ilosc wierszy w macierzy.\n";
+            cout<<"cols - Ilosc kolumn w macierzy.\n";
             cout<<"power - Potega do ktorej podnosimy macierz, liczba >=0.\n";
             cout<<"Zwraca wynik podniesienia macierzy do potegi.\n";
             break;
@@ -108,8 +110,8 @@ void help() {
             cout<<"Znajduje wyznacznik macierzy.\n";
             cout<<"determinantMatrix [matrixA] [rows] [cols]\n";
             cout<<"matrixA - Macierz.\n";
-            cout<<"rows - Ilosc wierszy w macierzach.\n";
-            cout<<"cols - Ilosc kolumn w macierzach.\n";
+            cout<<"rows - Ilosc wierszy w macierzy.\n";
+            cout<<"cols - Ilosc kolumn w macierzy.\n";
             cout<<"Zwraca wyznacznik macierzy.\n";
             break;
 
@@ -118,8 +120,8 @@ void help() {
             cout<<"Sprawdza diagonalnosc macierzy.\n";
             cout<<"matrixIsDiagonal [matrixA] [rows] [cols]\n";
             cout<<"matrixA - Macierz.\n";
-            cout<<"rows - Ilosc wierszy w macierzach.\n";
-            cout<<"cols - Ilosc kolumn w macierzach.\n";
+            cout<<"rows - Ilosc wierszy w macierzy.\n";
+            cout<<"cols - Ilosc kolumn w macierzy.\n";
             cout<<"Zwraca true jesli macierz jest diagonalna, false jesli nie jest.\n";
             break;
 
@@ -148,9 +150,22 @@ void help() {
             exit();
             break;
     }
+    getchar();
+    exit();
 }
 
 //INT
+
+void cinNewInt(int &value) {
+    cin>>value;
+
+    while(!cin.good()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
+        cin>>value;
+    }
+}
 
 void printMatrix(int **matrix, int rows, int cols) {
     for(int i=0; i<rows; i++) {
@@ -166,7 +181,7 @@ void fillMatrix(int **matrix, int rows, int cols) {
     for(int i=0; i<rows; i++) {
         for(int j=0; j<cols; j++) {
             cout<<"Aktualnie wprowadzana wartosc: kolumna "<<j+1<<", wiersz "<<i+1<<": ";
-            cin>>matrix[i][j];
+            cinNewInt(matrix[i][j]);
         }
     }
 }
@@ -201,6 +216,17 @@ void swap(int &a, int &b) {
 
 //DOUBLE
 /*
+
+void cinNewDouble(double &value) {
+    cin>>value;
+
+    while(!cin.good()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
+        cin>>value;
+    }
+}
 
 void printMatrix(double **matrix, int rows, int cols) {
     for(int i=0; i<rows; i++) {

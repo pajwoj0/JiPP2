@@ -7,11 +7,12 @@ using namespace std;
 int main(int argc, char **argv) {
     if(experimental::string_view(argv[1]) == "addMatrix") {
         int rows, cols;
+
         cout<<"Podaj ilosc wierszy obu macierzy: ";
-        cin>>rows;
+        cinNewInt(rows);
 
         cout<<"Podaj ilosc kolumn obu macierzy: ";
-        cin>>cols;
+        cinNewInt(cols);
 
         int** matrixA = new int*[rows];
         for(int i=0; i<rows; i++) matrixA[i] = new int[cols];
@@ -28,18 +29,19 @@ int main(int argc, char **argv) {
         int** result = new int*[rows];
         for(int i=0; i<rows; i++) result[i] = new int[cols];
 
-        cout<<endl<<"Macierz wynikowa"<<endl;
+        cout<<endl<<"Macierz wynikowa:"<<endl;
         printMatrix(addMatrix(matrixA, matrixB, rows, cols), rows, cols);
         exit();
     }
 
     if(experimental::string_view(argv[1]) == "subtractMatrix") {
         int rows, cols;
+
         cout<<"Podaj ilosc wierszy obu macierzy: ";
-        cin>>rows;
+        cinNewInt(rows);
 
         cout<<"Podaj ilosc kolumn obu macierzy: ";
-        cin>>cols;
+        cinNewInt(cols);
 
         int** matrixA = new int*[rows];
         for(int i=0; i<rows; i++) matrixA[i] = new int[cols];
@@ -61,9 +63,7 @@ int main(int argc, char **argv) {
         exit();
     }
 
-    if(experimental::string_view(argv[1]) == "help") {
-        help();
-    }
+    if(experimental::string_view(argv[1]) == "help") help();
 
     return 0;
 }
