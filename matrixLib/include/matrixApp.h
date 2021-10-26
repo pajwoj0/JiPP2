@@ -4,7 +4,7 @@
  * matrixApp - kalkulator macierzy, projekt na JiPP
  * @file matrixApp.h
  * @author Wojciech Pajtel
- * @version 0.2 23.10.2021
+ * @version 0.3 26.10.2021
  */
 
 /**
@@ -21,6 +21,14 @@ void exit();
  * Funkcja wyswietlajaca menu pomocy.
  */
 void help();
+
+/**
+ * Funkcja zwracajaca typ zmiennych ktore beda uzywane w obliczeniach.
+ * @return true dla liczb zmiennoprzecinkowych, false dla liczb calkowitych.
+ */
+bool matrixTypeCheck();
+
+//INT
 
 /**
  * Funkcja odpowiadajaca za wprowadzenie wartosci calkowitej z klawiatury, uzytkownik wpisuje wartosc dopoki nie jest ona wartoscia calkowita (int).
@@ -146,6 +154,8 @@ void sortRow(int *array, int cols);
  */
 int** sortRowsInMatrix(int **matrixA, int rows, int cols);
 
+//DOUBLE
+
 /**
  * Funkcja odpowiadajaca za wprowadzenie wartosci zmiennoprzecinkowej z klawiatury, uzytkownik wpisuje wartosc dopoki nie jest ona wartoscia zmiennoprzecinkowa (double).
  * @param value Wartosc wpisywana przez uzytkownika.
@@ -226,7 +236,7 @@ double** transpozeMatrix(double **matrixA, int rows, int cols);
  * @param power Potega do ktorej podnosimy macierz, liczba >=0.
  * @return Wynik podniesienia macierzy do potegi.
  */
-double** powerMatrix(double **matrixA, int rows, int cols, unsigned int power);
+double** powerMatrix(double **matrixA, int rows, int cols, int power);
 
 /**
  * Znajduje wyznacznik macierzy.
@@ -253,7 +263,19 @@ bool matrixIsDiagonal(double **matrixA, int rows, int cols);
  */
 void swap(double &a, double &b);
 
+/**
+ * Sortuje rosnaco tablice, uzywa sortowania babelkowego.
+ * @param array Tablica do posortowania.
+ * @param cols Ilosc wartosci w tablicy.
+ */
 void sortRow(double *array, int cols);
-void sortRowsInMatrix(double **matrixA, int rows, int cols);
+
+/**
+ * Sortuje rosnaco wszystkie wiersze w macierzy, uzywa sortRow.
+ * @param matrixA Macierz do posortowania.
+ * @param rows Ilosc wierszy w macierzy.
+ * @param cols Ilosc kolumn w macierzy.
+ */
+double** sortRowsInMatrix(double **matrixA, int rows, int cols);
 
 #endif //MAIN_CPP_MATRIXAPP_H

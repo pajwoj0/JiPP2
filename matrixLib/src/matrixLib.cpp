@@ -136,12 +136,19 @@ void help() {
 
         case 10:
             cout<<endl;
-            cout<<"10";
+            cout<<"Sortuje rosnaco tablice, uzywa sortowania babelkowego.\n";
+            cout<<"sortRow [array] [cols]\n";
+            cout<<"array - Tablica do posortowania.\n";
+            cout<<"cols - Ilosc wartosci w tablicy.\n";
             break;
 
         case 11:
             cout<<endl;
-            cout<<"11";
+            cout<<"Sortuje rosnaco wszystkie wiersze w macierzy, uzywa sortRow.\n";
+            cout<<"sortRowsInMatrix [matrixA] [rows] [cols]\n";
+            cout<<"matrixA - Macierz.\n";
+            cout<<"rows - Ilosc wierszy w macierzy.\n";
+            cout<<"cols - Ilosc kolumn w macierzy.\n";
             break;
 
         default:
@@ -155,17 +162,38 @@ void help() {
     exit();
 }
 
+bool matrixTypeCheck() {
+    string dataType;
+        cout<<"Jakiego typu danych chcesz uzywac?"<<endl;
+        cout<<"Wpisz 'double' dla liczb zmiennoprzecinkowych (ulamkow)."<<endl;
+        cout<<"Wpisz 'int' dla liczb calkowitych: ";
+
+        do {
+            cin>>dataType;
+            if(dataType!="double" && dataType!="int") cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
+        } while(dataType!="double" && dataType!="int");
+
+        cout<<endl;
+        if(dataType=="double") return true;
+        else return false;
+}
+
 //INT
 
 void cinNewInt(int &value) {
-    cin>>value;
+    double temp;
 
-    while(!cin.good()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
-        cin>>value;
-    }
+    do {
+        cin>>temp;
+        if(!cin.good()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
+            cin>>temp;
+        }
+    } while(!cin.good());
+
+    value=(int)temp;
 }
 
 void printMatrix(int **matrix, int rows, int cols) {
@@ -299,6 +327,154 @@ int** sortRowsInMatrix(int **matrixA, int rows, int cols) {
 
 void swap(int &a, int &b) {
     int temp=a;
+    a=b;
+    b=temp;
+}
+
+//DOUBLE
+
+void cinNewDouble(double &value) {
+    cin>>value;
+
+    while(!cin.good()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
+        cin>>value;
+    }
+}
+
+void printMatrix(double **matrix, int rows, int cols) {
+    for(int i=0; i<rows; i++) {
+        for(int j=0; j<cols; j++) {
+            cout<<matrix[i][j]<<"\t";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+}
+
+void fillMatrix(double **matrix, int rows, int cols) {
+    for(int i=0; i<rows; i++) {
+        for(int j=0; j<cols; j++) {
+            cout<<"Aktualnie wprowadzana wartosc: kolumna "<<j+1<<", wiersz "<<i+1<<": ";
+            cinNewDouble(matrix[i][j]);
+        }
+    }
+}
+
+double** addMatrix (double **matrixA, double **matrixB, int rows, int cols) {
+    double** result = new double*[rows];
+    for(int i=0; i<rows; i++) result[i] = new double[cols];
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            result[i][j]=matrixA[i][j]+matrixB[i][j];
+
+    return result;
+}
+
+double** subtractMatrix(double **matrixA, double **matrixB, int rows, int cols) {
+    double** result = new double*[rows];
+    for(int i=0; i<rows; i++) result[i] = new double[cols];
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            result[i][j]=matrixA[i][j]-matrixB[i][j];
+
+    return result;
+}
+
+double** multiplyMatrix(double **matrixA, double **matrixB, int aRows, int aCols, int bCols) {
+    double** result = new double*[aRows];
+    for(int i=0; i<aRows; i++) result[i] = new double[bCols];
+
+    for(int i=0; i<aRows; i++)
+        for(int j=0; j<bCols; j++)
+            for(int k=0; k<aCols; k++) result[i][j] += matrixA[i][k] * matrixB[k][j];
+
+    return result;
+}
+
+double** multiplyByScalar(double **matrixA, int rows, int cols, double scalar) {
+    double** result = new double*[rows];
+    for(int i=0; i<rows; i++) result[i] = new double[cols];
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            result[i][j]=matrixA[i][j]*scalar;
+
+    return result;
+}
+
+double** transpozeMatrix(double **matrixA, int rows, int cols) {
+    double** result = new double*[cols];
+    for(int i=0; i<cols; i++) result[i] = new double[rows];
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            result[j][i]=matrixA[i][j];
+
+    return result;
+}
+
+double** powerMatrix(double **matrixA, int rows, int cols, int power) {
+    double** result = new double*[cols];
+    for(int i=0; i<cols; i++) result[i] = new double[rows];
+
+    if(power==0) {
+        for(int i=0; i<rows; i++)
+            for(int j=0; j<cols; j++) {
+                if(i==j) result[i][j]=1;
+                else result[i][j]=0;
+            }
+    }
+
+    else {
+        for(int i=1; i<=power; i++) {
+            if(i==1) {
+                for(int i=0; i<rows; i++)
+                    for(int j=0; j<cols; j++)
+                        result[i][j]=matrixA[i][j];
+            }
+
+            else result=multiplyMatrix(result, matrixA, rows, cols, cols);
+        }
+    }
+
+    return result;
+}
+
+bool matrixIsDiagonal(double **matrixA, int rows, int cols) {
+    if(rows!=cols) return false;
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            if(i!=j && matrixA[i][j]!=0) return false;
+    return true;
+}
+
+void sortRow(double *array, int cols) {
+    for(int i=0; i<cols-1; i++)
+        for(int j=0; j<cols-i-1; j++)
+            if(array[j] > array[j+1]) swap(array[j], array[j+1]);
+}
+
+double** sortRowsInMatrix(double **matrixA, int rows, int cols) {
+    double** result = new double*[cols];
+    for(int i=0; i<cols; i++) result[i] = new double[rows];
+
+    for(int i=0; i<rows; i++) sortRow(matrixA[i], cols);
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            result[i][j]=matrixA[i][j];
+
+    return result;
+}
+
+void swap(double &a, double &b) {
+    double temp=a;
     a=b;
     b=temp;
 }

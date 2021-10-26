@@ -1,0 +1,2 @@
+- inputting a value with garbage after it (such as "2fdfdfs") does not make the user input the value again, it prints the wrong value message and sets value as whatever the number before the garbage was (in this case 2)
+- a terribly large amount of copy-pasting (mainly due to the fact I couldn't find a way to use the same variable name for different variable types in different cases - for example matrixA has to be either int or double, can't change it once it's declared as one)
