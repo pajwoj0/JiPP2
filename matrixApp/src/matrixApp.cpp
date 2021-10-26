@@ -273,23 +273,23 @@ int main(int argc, char **argv) {
         int rows, cols;
         bool makeMatrixDouble=matrixTypeCheck();
 
-        cout<<"Podaj ilosc wierszy obu macierzy: ";
+        cout<<"Podaj ilosc wierszy macierzy: ";
         do {
             cinNewInt(rows);
             if(rows<=0) cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
         } while(rows<=0);
 
-        cout<<"Podaj ilosc kolumn obu macierzy: ";
+        cout<<"Podaj ilosc kolumn macierzy: ";
         do {
             cinNewInt(cols);
             if(cols<=0) cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
         } while(cols<=0);
-        cout<<endl;
 
         if(makeMatrixDouble) {
             double scalar;
             cout<<"Podaj skalar: ";
             cinNewDouble(scalar);
+            cout<<endl;
 
             double** matrixA = new double*[rows];
             for(int i=0; i<rows; i++) matrixA[i] = new double[cols];
@@ -317,6 +317,7 @@ int main(int argc, char **argv) {
             int scalar;
             cout<<"Podaj skalar: ";
             cinNewInt(scalar);
+            cout<<endl;
 
             int** matrixA = new int*[rows];
             for(int i=0; i<rows; i++) matrixA[i] = new int[cols];
@@ -345,13 +346,13 @@ int main(int argc, char **argv) {
         int rows, cols;
         bool makeMatrixDouble=matrixTypeCheck();
 
-        cout<<"Podaj ilosc wierszy obu macierzy: ";
+        cout<<"Podaj ilosc wierszy macierzy: ";
         do {
             cinNewInt(rows);
             if(rows<=0) cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
         } while(rows<=0);
 
-        cout<<"Podaj ilosc kolumn obu macierzy: ";
+        cout<<"Podaj ilosc kolumn macierzy: ";
         do {
             cinNewInt(cols);
             if(cols<=0) cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
@@ -409,18 +410,17 @@ int main(int argc, char **argv) {
         int rows, cols, power;
         bool makeMatrixDouble=matrixTypeCheck();
 
-        cout<<"Podaj ilosc wierszy obu macierzy: ";
+        cout<<"Podaj ilosc wierszy macierzy: ";
         do {
             cinNewInt(rows);
             if(rows<=0) cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
         } while(rows<=0);
 
-        cout<<"Podaj ilosc kolumn obu macierzy: ";
+        cout<<"Podaj ilosc kolumn macierzy: ";
         do {
             cinNewInt(cols);
             if(cols<=0) cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
         } while(cols<=0);
-        cout<<endl;
 
         if(rows!=cols) {
             getchar();
@@ -433,6 +433,7 @@ int main(int argc, char **argv) {
             cinNewInt(power);
             if(power<0) cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
         } while(power<0);
+        cout<<endl;
 
         if(makeMatrixDouble) {
             double** matrixA = new double*[rows];
@@ -512,6 +513,7 @@ int main(int argc, char **argv) {
             fillMatrix(matrixA, rows, cols);
 
             cout<<endl<<"Macierz wynikowa:"<<endl;
+            printMatrix(matrixA, rows, cols);
             if(matrixIsDiagonal(matrixA, rows, cols)) cout<<"Macierz jest diagonalna.";
             if(!matrixIsDiagonal(matrixA, rows, cols)) cout<<"Macierz nie jest diagonalna.";
             getchar();
@@ -536,6 +538,7 @@ int main(int argc, char **argv) {
             fillMatrix(matrixA, rows, cols);
 
             cout<<endl<<"Macierz wynikowa:"<<endl;
+            printMatrix(matrixA, rows, cols);
             if(matrixIsDiagonal(matrixA, rows, cols)) cout<<"Macierz jest diagonalna.";
             if(!matrixIsDiagonal(matrixA, rows, cols)) cout<<"Macierz nie jest diagonalna.";
             getchar();
@@ -546,6 +549,46 @@ int main(int argc, char **argv) {
             for(int i=0; i<rows; i++) delete[] result[i];
             delete[] result;
 
+            exit();
+        }
+    }
+
+    if(experimental::string_view(argv[1]) == "swap") {
+        bool makeMatrixDouble=matrixTypeCheck();
+
+        if(makeMatrixDouble) {
+            double val1, val2;
+
+            cout<<"Wprowadz wartosc 1: ";
+            cinNewDouble(val1);
+            cout<<"Wprowadz wartosc 2: ";
+            cinNewDouble(val2);
+
+            swap(val1, val2);
+
+            cout<<"Wartosci po zamianie: "<<endl;
+            cout<<"Wartosc 1: "<<val1<<endl;
+            cout<<"Wartosc 2: "<<val2<<endl;
+
+            getchar();
+            exit();
+        }
+
+       else {
+            int val1, val2;
+
+            cout<<"Wprowadz wartosc 1: ";
+            cinNewInt(val1);
+            cout<<"Wprowadz wartosc 2: ";
+            cinNewInt(val2);
+
+            swap(val1, val2);
+
+            cout<<"Wartosci po zamianie: "<<endl;
+            cout<<"Wartosc 1: "<<val1<<endl;
+            cout<<"Wartosc 2: "<<val2<<endl;
+
+            getchar();
             exit();
         }
     }

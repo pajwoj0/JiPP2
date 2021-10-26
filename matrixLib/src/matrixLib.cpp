@@ -23,6 +23,7 @@ void help() {
     int option;
 
     cout<<"Wybierz funkcje, do ktorej chcesz otrzymac pomoc.\n";
+    cout<<"0 - wyjscie z pomocy, zakonczenie programu.\n";
     cout<<"1 - addMatrix - dodawanie macierzy\n";
     cout<<"2 - subtractMatrix - odejmowanie macierzy\n";
     cout<<"3 - multiplyMatrix - mnozenie macierzy\n";
@@ -38,6 +39,8 @@ void help() {
     cin>>option;
 
     switch(option) {
+        case 0:
+            break;
         case 1:
             cout<<endl;
             cout<<"Dodaje dwie macierze, zwraca wynik.\n";
@@ -98,6 +101,7 @@ void help() {
             cout<<endl;
             cout<<"Podnosi macierz do potegi.\n";
             cout<<"UWAGA! Ilosc wierszy musi byc rowna ilosci kolumn.\n";
+            cout<<"UWAGA! Potega to liczba calkowita wieksza lub rowna 0.\n";
             cout<<"powerMatrix [matrixA] [rows] [cols] [power]\n";
             cout<<"matrixA - Macierz.\n";
             cout<<"rows - Ilosc wierszy w macierzy.\n";
