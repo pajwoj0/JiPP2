@@ -41,6 +41,7 @@ void help() {
     switch(option) {
         case 0:
             break;
+
         case 1:
             cout<<endl;
             cout<<"Dodaje dwie macierze, zwraca wynik.\n";
