@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if(experimental::string_view(argv[1]) == "subtractMatrix") {
+    else if(experimental::string_view(argv[1]) == "subtractMatrix") {
         int rows, cols;
         bool makeMatrixDouble=matrixTypeCheck();
 
@@ -169,7 +169,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if(experimental::string_view(argv[1]) == "multiplyMatrix") {
+    else if(experimental::string_view(argv[1]) == "multiplyMatrix") {
         int aRows, aCols, bCols, bRows;
         bool makeMatrixDouble=matrixTypeCheck();
 
@@ -269,7 +269,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if(experimental::string_view(argv[1]) == "multiplyByScalar") {
+    else if(experimental::string_view(argv[1]) == "multiplyByScalar") {
         int rows, cols;
         bool makeMatrixDouble=matrixTypeCheck();
 
@@ -342,7 +342,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if(experimental::string_view(argv[1]) == "transpozeMatrix") {
+    else if(experimental::string_view(argv[1]) == "transpozeMatrix") {
         int rows, cols;
         bool makeMatrixDouble=matrixTypeCheck();
 
@@ -406,7 +406,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if(experimental::string_view(argv[1]) == "powerMatrix") {
+    else if(experimental::string_view(argv[1]) == "powerMatrix") {
         int rows, cols, power;
         bool makeMatrixDouble=matrixTypeCheck();
 
@@ -482,10 +482,75 @@ int main(int argc, char **argv) {
         }
     }
 
-    /* if(experimental::string_view(argv[1]) == "determinantMatrix") {
-    } */
+    else if(experimental::string_view(argv[1]) == "determinantMatrix") {
+        int rows, cols;
+        bool makeMatrixDouble=matrixTypeCheck();
 
-    if(experimental::string_view(argv[1]) == "matrixIsDiagonal") {
+        cout<<"Podaj ilosc wierszy macierzy: ";
+        do {
+            cinNewInt(rows);
+            if(rows<=0) cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
+        } while(rows<=0);
+
+        cout<<"Podaj ilosc kolumn macierzy: ";
+        do {
+            cinNewInt(cols);
+            if(cols<=0) cout<<"Podano bledna wartosc. Sprobuj ponownie: ";
+        } while(cols<=0);
+        cout<<endl;
+
+        if(rows!=cols) {
+            getchar();
+            error();
+            return 1;
+        }
+
+        if(makeMatrixDouble) {
+            double** matrixA = new double*[rows];
+            for(int i=0; i<rows; i++) matrixA[i] = new double[cols];
+
+            double result;
+
+            cout<<"Macierz A:"<<endl;
+            fillMatrix(matrixA, rows, cols);
+
+            cout<<endl<<"Macierz:"<<endl;
+            printMatrix(matrixA, rows, cols);
+
+            result=determinantMatrix(matrixA, rows, cols);
+            cout<<"Wyznacznik macierzy: "<<result;
+            getchar();
+
+            for(int i=0; i<rows; i++) delete[] matrixA[i];
+            delete[] matrixA;
+
+            exit();
+        }
+
+        else {
+            int** matrixA = new int*[rows];
+            for(int i=0; i<rows; i++) matrixA[i] = new int[cols];
+
+            int result;
+
+            cout<<"Macierz A:"<<endl;
+            fillMatrix(matrixA, rows, cols);
+
+            cout<<endl<<"Macierz:"<<endl;
+            printMatrix(matrixA, rows, cols);
+
+            result=determinantMatrix(matrixA, rows, cols);
+            cout<<"Wyznacznik macierzy: "<<result;
+            getchar();
+
+            for(int i=0; i<rows; i++) delete[] matrixA[i];
+            delete[] matrixA;
+
+            exit();
+        }
+    }
+
+    else if(experimental::string_view(argv[1]) == "matrixIsDiagonal") {
         int rows, cols;
         bool makeMatrixDouble=matrixTypeCheck();
 
@@ -512,7 +577,7 @@ int main(int argc, char **argv) {
             cout<<"Macierz A:"<<endl;
             fillMatrix(matrixA, rows, cols);
 
-            cout<<endl<<"Macierz wynikowa:"<<endl;
+            cout<<endl<<"Macierz:"<<endl;
             printMatrix(matrixA, rows, cols);
             if(matrixIsDiagonal(matrixA, rows, cols)) cout<<"Macierz jest diagonalna.";
             if(!matrixIsDiagonal(matrixA, rows, cols)) cout<<"Macierz nie jest diagonalna.";
@@ -537,7 +602,7 @@ int main(int argc, char **argv) {
             cout<<"Macierz A:"<<endl;
             fillMatrix(matrixA, rows, cols);
 
-            cout<<endl<<"Macierz wynikowa:"<<endl;
+            cout<<endl<<"Macierz:"<<endl;
             printMatrix(matrixA, rows, cols);
             if(matrixIsDiagonal(matrixA, rows, cols)) cout<<"Macierz jest diagonalna.";
             if(!matrixIsDiagonal(matrixA, rows, cols)) cout<<"Macierz nie jest diagonalna.";
@@ -553,7 +618,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if(experimental::string_view(argv[1]) == "swap") {
+    else if(experimental::string_view(argv[1]) == "swap") {
         bool makeMatrixDouble=matrixTypeCheck();
 
         if(makeMatrixDouble) {
@@ -574,7 +639,7 @@ int main(int argc, char **argv) {
             exit();
         }
 
-       else {
+        else {
             int val1, val2;
 
             cout<<"Wprowadz wartosc 1: ";
@@ -593,7 +658,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if(experimental::string_view(argv[1]) == "sortRow") {
+    else if(experimental::string_view(argv[1]) == "sortRow") {
         int cols;
         bool makeMatrixDouble=matrixTypeCheck();
 
@@ -641,7 +706,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if(experimental::string_view(argv[1]) == "sortRowsInMatrix") {
+    else if(experimental::string_view(argv[1]) == "sortRowsInMatrix") {
         int rows, cols;
         bool makeMatrixDouble=matrixTypeCheck();
 
@@ -705,7 +770,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    if(experimental::string_view(argv[1]) == "help") help();
+    else help();
 
     return 0;
 }

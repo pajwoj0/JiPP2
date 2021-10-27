@@ -1,7 +1,7 @@
 #include <iostream>
 #include "matrixApp.h"
 #include <string>
-#include <experimental/string_view>
+#include <cmath>
 using namespace std;
 
 void error() {
@@ -114,6 +114,7 @@ void help() {
         case 7:
             cout<<endl;
             cout<<"Znajduje wyznacznik macierzy.\n";
+            cout<<"UWAGA! Ilosc wierszy musi byc rowna ilosci kolumn.\n";
             cout<<"determinantMatrix [matrixA] [rows] [cols]\n";
             cout<<"matrixA - Macierz.\n";
             cout<<"rows - Ilosc wierszy w macierzy.\n";
@@ -302,6 +303,34 @@ int** powerMatrix(int **matrixA, int rows, int cols, int power) {
     return result;
 }
 
+int determinantMatrix(int **matrixA, int rows, int cols) {
+    int result=0;
+    int subMatrixRow, subMatrixCol;
+
+    int** subMatrix = new int*[rows];
+    for(int i=0; i<rows; i++) subMatrix[i] = new int[cols];
+
+    if (rows==2 && cols==2) return((matrixA[0][0] * matrixA[1][1]) - (matrixA[1][0] * matrixA[0][1]));
+
+    else {
+        for(int i=0; i<rows; i++) {
+            subMatrixRow=0;
+            for(int j=1; j<cols; j++) {
+                subMatrixCol=0;
+                for(int k=0; k<rows; k++) {
+                    if (k == i) continue;
+                    subMatrix[subMatrixRow][subMatrixCol] = matrixA[j][k];
+                    subMatrixCol++;
+                }
+                subMatrixRow++;
+            }
+            result = result + (pow(-1,i) * matrixA[0][i] * determinantMatrix(subMatrix, rows-1, cols-1));
+        }
+    }
+
+    return result;
+}
+
 bool matrixIsDiagonal(int **matrixA, int rows, int cols) {
     if(rows!=cols) return false;
 
@@ -444,6 +473,34 @@ double** powerMatrix(double **matrixA, int rows, int cols, int power) {
             }
 
             else result=multiplyMatrix(result, matrixA, rows, cols, cols);
+        }
+    }
+
+    return result;
+}
+
+double determinantMatrix(double **matrixA, int rows, int cols) {
+    double result=0;
+    int subMatrixRow, subMatrixCol;
+
+    double** subMatrix = new double*[rows];
+    for(int i=0; i<rows; i++) subMatrix[i] = new double[cols];
+
+    if (rows==2 && cols==2) return((matrixA[0][0] * matrixA[1][1]) - (matrixA[1][0] * matrixA[0][1]));
+
+    else {
+        for(int i=0; i<rows; i++) {
+            subMatrixRow=0;
+            for(int j=1; j<cols; j++) {
+                subMatrixCol=0;
+                for(int k=0; k<rows; k++) {
+                    if (k == i) continue;
+                    subMatrix[subMatrixRow][subMatrixCol] = matrixA[j][k];
+                    subMatrixCol++;
+                }
+                subMatrixRow++;
+            }
+            result = result + (pow(-1,i) * matrixA[0][i] * determinantMatrix(subMatrix, rows-1, cols-1));
         }
     }
 
