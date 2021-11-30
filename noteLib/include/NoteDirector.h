@@ -1,4 +1,7 @@
-#include "include.h"
+#ifndef MAIN_CPP_NOTEDIRECTOR_H
+#define MAIN_CPP_NOTEDIRECTOR_H
+
+#include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -12,3 +15,5 @@ public:
     void editNote();
     void clearNotesList();
 };
+
+#endif //MAIN_CPP_NOTEDIRECTOR_H
