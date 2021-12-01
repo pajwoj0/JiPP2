@@ -4,8 +4,8 @@
 #include "Note.h"
 using namespace std;
 
-void Note :: getTitle() {
-    cout<<title;
+string Note :: getTitle() {
+    return title;
 }
 
 void Note :: setTitle(string title) {

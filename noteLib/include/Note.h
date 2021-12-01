@@ -10,7 +10,7 @@ class Note {
 private:
     string title;
 public:
-    void getTitle();
+    string getTitle();
     void setTitle(string title);
 
     virtual void getContent();

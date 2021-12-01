@@ -8,11 +8,15 @@ using namespace std;
 
 class NoteDirector {
 private:
-    vector<string> notesList;
+    vector<Note> notesList;
 public:
-    void addNote();
-    void deleteNote();
-    void editNote();
+    void printNote(int number);
+    int getSize();
+    void printNotes();
+    void editTitle(int number, string text);
+    void addNote(int type);
+    void deleteNote(int number);
+    void editNote(int number, string text);
     void clearNotesList();
 };
 

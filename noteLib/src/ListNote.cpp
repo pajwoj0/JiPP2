@@ -5,8 +5,7 @@
 using namespace std;
 
 void ListNote :: getContent() {
-    int i = content.size();
-    for(int j=0; j<i; j++) cout<<content[j]<<endl;
+    for(int i=0; i<content.size(); i++) cout<<content[i]<<endl;
 }
 
 void ListNote :: setContent(string text) {
