@@ -8,8 +8,8 @@
 using namespace std;
 
 void NoteDirector::printNote(int number) {
-    cout<<notesList[number].getTitle()<<endl;
-    notesList[number].getContent();
+    cout<<notesList[number]->getTitle()<<endl<<endl;
+    notesList[number]->getContent();
 }
 
 int NoteDirector::getSize() {
@@ -18,17 +18,17 @@ int NoteDirector::getSize() {
 
 void NoteDirector::printNotes() {
     for(int i=0; i<notesList.size(); i++) {
-        cout<<i<<" - "<<notesList[i].getTitle()<<endl;
+        cout<<i<<" - "<<notesList[i]->getTitle()<<endl;
     }
 }
 
 void NoteDirector::editTitle(int number, string text) {
-    notesList[number].setTitle(text);
+    notesList[number]->setTitle(text);
 }
 
 void NoteDirector::addNote(int type) {
-    if(type==1) notesList.push_back(TextNote());
-    if(type==2) notesList.push_back(ListNote());
+    if(type==1) notesList.push_back(new TextNote());
+    if(type==2) notesList.push_back(new ListNote());
 }
 
 void NoteDirector::deleteNote(int number) {
@@ -38,7 +38,7 @@ void NoteDirector::deleteNote(int number) {
 }
 
 void NoteDirector::editNote(int number, string text) {
-    notesList[number].setContent(text);
+    notesList[number]->setContent(text);
 }
 
 void NoteDirector::clearNotesList() {

@@ -5,7 +5,7 @@
 using namespace std;
 
 void TextNote :: getContent() {
-    cout<<content;
+    cout<<content<<endl;
 }
 
 void TextNote :: setContent(string text) {

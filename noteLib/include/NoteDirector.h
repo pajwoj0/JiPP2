@@ -8,7 +8,7 @@ using namespace std;
 
 class NoteDirector {
 private:
-    vector<Note> notesList;
+    vector<Note*> notesList;
 public:
     void printNote(int number);
     int getSize();

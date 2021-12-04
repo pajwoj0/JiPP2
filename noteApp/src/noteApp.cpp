@@ -21,9 +21,9 @@ int main() {
         cout<<"1 - wypisanie listy notatek"<<endl;
         cout<<"2 - wypisanie zawartosci notatki"<<endl;
         cout<<"3 - utworzenie nowej notatki"<<endl;
-        cout<<"4 - usuniecie notatki"<<endl;
-        cout<<"5 - edycja zawartosci notatki"<<endl;
-        cout<<"6 - edycja tytulu notatki"<<endl;
+        cout<<"4 - edycja tytulu notatki"<<endl;
+        cout<<"5 - edycja zawartosci notatki (w przypadku notatki listowej zostanie dodany nowy element do listy)"<<endl;
+        cout<<"6 - usuniecie notatki"<<endl;
         cout<<"7 - usuniecie wszystkich notatek"<<endl;
 
         cin>>menu;
@@ -74,7 +74,7 @@ int main() {
             notes.printNotes();
             cout<<endl;
 
-            cout<<"Podaj numer notatki do usuniecia: ";
+            cout<<"Podaj numer notatki do edycji: ";
 
             do {
                 cin>>number;
@@ -82,7 +82,12 @@ int main() {
                 cin.ignore(10000, '\n');
             } while(number<0 || number>notes.getSize()-1);
 
-            notes.deleteNote(number);
+            cout<<"Podaj tytul: ";
+            getline(cin, text);
+            cin.clear();
+            cin.ignore(10000, '\n');
+
+            notes.editTitle(number, text);
         }
 
         if(menu==5) {
@@ -109,7 +114,7 @@ int main() {
             notes.printNotes();
             cout<<endl;
 
-            cout<<"Podaj numer notatki do edycji: ";
+            cout<<"Podaj numer notatki do usuniecia: ";
 
             do {
                 cin>>number;
@@ -117,12 +122,7 @@ int main() {
                 cin.ignore(10000, '\n');
             } while(number<0 || number>notes.getSize()-1);
 
-            cout<<"Podaj tytul: ";
-            getline(cin, text);
-            cin.clear();
-            cin.ignore(10000, '\n');
-
-            notes.editTitle(number, text);
+            notes.deleteNote(number);
         }
 
         if(menu==7) notes.clearNotesList();
