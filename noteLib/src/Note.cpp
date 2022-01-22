@@ -12,7 +12,7 @@ void Note :: setTitle(string title) {
     this->title=title;
 }
 
-void Note::getContent() {}
+vector<string> Note::getContent() {}
 
 void Note::setContent(string text) {}
 

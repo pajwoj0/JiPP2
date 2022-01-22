@@ -11,7 +11,7 @@ class ListNote : public Note {
 private:
     vector<string> content;
 public:
-    void getContent();
+    string getContent();
     void setContent(string text);
 };
 

@@ -4,7 +4,7 @@
 #include "ListNote.h"
 using namespace std;
 
-void ListNote :: getContent() {
+string ListNote :: getContent() {
     for(int i=0; i<content.size(); i++) cout<<content[i]<<endl;
 }
 

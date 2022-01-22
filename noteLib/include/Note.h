@@ -13,7 +13,7 @@ public:
     string getTitle();
     void setTitle(string title);
 
-    virtual void getContent();
+    virtual vector<string> getContent();
     virtual void setContent(string text);
 
     virtual ~Note();
